@@ -3,19 +3,19 @@
     <h1>{{ msg }}</h1>
 
     <div v-if="!this.isLoggedIn">
-      <h2>Not logged in yet?</h2>
+      <h2>You are not logged in</h2>
       <button type="button" @click="login()">Login</button>
     </div>
 
     <div v-if="this.isLoggedIn">
       <h2>You are logged in</h2>
-      <button type="button">Logout</button>
+      <button type="button" @click="logout()">Logout</button>
     </div>
   </div>
 </template>
 
 <script>
-import { login, loggedIn } from "../utils/auth"
+import { login, isLoggedIn, logout } from "../utils/auth"
 
 export default {
   name: 'HelloWorld',
@@ -25,11 +25,17 @@ export default {
   methods: {
     login: function() {
       login();
+    },
+    logout: function() {
+      debugger;
+      logout();
+
+      this.isLoggedIn = false;
     }
   },
   data: function() {
     return {
-      isLoggedIn: loggedIn()
+      isLoggedIn: isLoggedIn()
     };    
   }
 }

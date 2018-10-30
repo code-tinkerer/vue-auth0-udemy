@@ -17,6 +17,7 @@ var tokens = {};
 
 const handleAuth = (callback) => {
     webAuth.parseHash((error, authResult) => {
+        debugger;
         if (authResult && authResult.accessToken && authResult.idToken)
         {
             tokens.accessToken = authResult.accessToken;
@@ -36,13 +37,23 @@ const signup = () => {
     webAuth.signup();
 };
 
-const loggedIn = () => {
+const isLoggedIn = () => {
+    debugger;
+    console.log("[isLoggedIn]: tokens is");
+    console.log(tokens)
     return tokens.accessToken && (new Date()).getTime() < tokens.expiration;
+};
+
+const logout = () => {
+    debugger;
+    console.log("[logout]: logging out");
+    tokens = {};
 };
 
 export {
     login,
     signup,
     handleAuth,
-    loggedIn
+    isLoggedIn,
+    logout
 };
